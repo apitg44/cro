@@ -1324,11 +1324,51 @@
             
             <div class="about">
                 <div class="about-image fade-in">
-                    <div class="about-image-content">
-                        <i class="fas fa-users"></i>
-                        <h3>Equipo Especializado</h3>
-                        <p>Expertos en finanzas, IA y blockchain con más de 10 años de experiencia</p>
-                    </div>
+                    <style>
+                        .image-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.image-wrapper img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Cubrimos toda la altura, pero el gradiente hará que la parte visible sea solo la inferior */
+.image-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;          /* Ocupará realmente todo el contenedor */
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* 
+    – El degradado arranca en el fondo (0%) con negro semitransparente (rgba(0,0,0,0.6)). 
+    – Se mantiene oscuro hasta, digamos, el 20% de la altura desde abajo. 
+    – Luego, de 20% a 60% hace la transición a transparente.
+    – Desde 60% hacia arriba queda transparente (mostrando la imagen normalmente).
+    Ajusta los porcentajes “20%” y “60%” al nivel que prefieras.
+  */
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.6) 0%,   /* 0% = borde inferior, negro semitransp. */
+    rgba(0, 0, 0, 0.6) 20%,  /* hasta el 20% seguimos al 60% de opacidad */
+    rgba(0, 0, 0, 0.0) 60%,  /* en el 60% ya es totalmente transparente */
+    rgba(0, 0, 0, 0.0) 100%  /* 100% = borde superior = transparente */
+  );
+  pointer-events: none;
+}
+
+                    </style>
+                   <div class="about-image-content">
+  <div class="image-wrapper">
+    <img src="img/photo_2025-06-03_12-40-24-removebg-preview.png" alt="" />
+  </div>
+  <h3>Equipo Especializado</h3>
+  <p>Expertos en finanzas, IA y blockchain con más de 10 años de experiencia</p>
+</div>
                 </div>
                 
                 <div class="about-content fade-in">

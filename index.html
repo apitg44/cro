@@ -949,61 +949,6 @@
             font-size: 0.9rem;
         }
 
-        /* Responsive */
-        @media (max-width: 992px) {
-            .hero h1 {
-                font-size: 3rem;
-            }
-            
-            .about {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero {
-                padding: 150px 0 80px;
-            }
-            
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .stats {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .nav-links {
-                display: none;
-            }
-            
-            .section-title h2 {
-                font-size: 2.3rem;
-            }
-            
-            .simulator {
-                padding: 2.5rem 1.5rem;
-            }
-            
-            .btn-secondary {
-                margin-left: 0;
-                margin-top: 15px;
-            }
-        }
-
-        /* Animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
         /* Chat Button */
         .chat-btn {
             position: fixed;
@@ -1062,42 +1007,157 @@
             color: #00D2F9;
             font-size: 1.8rem;
             cursor: pointer;
+            z-index: 1001;
         }
         
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            height: 100vh;
+            background: rgba(11, 11, 42, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 999;
+            transition: right 0.4s ease;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+            padding: 80px 20px 20px;
+            overflow-y: auto;
+        }
+        
+        .mobile-menu.active {
+            right: 0;
+        }
+        
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 0 20px;
+            border-bottom: 1px solid rgba(99, 91, 255, 0.3);
+            margin-bottom: 20px;
+        }
+        
+        .mobile-menu-close {
+            background: none;
+            border: none;
+            color: #00D2F9;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .mobile-menu-links {
+            list-style: none;
+        }
+        
+        .mobile-menu-links li {
+            margin-bottom: 15px;
+        }
+        
+        .mobile-menu-links a {
+            display: block;
+            color: #D3D3D3;
+            text-decoration: none;
+            padding: 12px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+        
+        .mobile-menu-links a:hover {
+            background: rgba(99, 91, 255, 0.2);
+            color: #00D2F9;
+            transform: translateX(5px);
+        }
+        
+        .mobile-menu-auth {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .mobile-menu-auth .btn-primary {
+            text-align: center;
+            width: 100%;
+        }
+        
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+        
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .about {
+                grid-template-columns: 1fr;
+            }
+        }
+
         @media (max-width: 768px) {
-            .mobile-menu-btn {
-                display: block;
+            .hero {
+                padding: 150px 0 80px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .stats {
+                flex-direction: column;
+                align-items: center;
             }
             
             .nav-links {
-                position: fixed;
-                top: 80px;
-                left: -100%;
-                width: 80%;
-                height: calc(100vh - 80px);
-                background: rgba(11, 11, 42, 0.98);
-                flex-direction: column;
-                justify-content: flex-start;
-                padding-top: 40px;
-                transition: left 0.4s ease;
-                z-index: 999;
-                backdrop-filter: blur(10px);
+                display: none;
             }
             
-            .nav-links.active {
-                left: 0;
+            .section-title h2 {
+                font-size: 2.3rem;
             }
             
-            .nav-links li {
-                width: 100%;
-                text-align: center;
+            .simulator {
+                padding: 2.5rem 1.5rem;
             }
             
-            .nav-links a {
+            .btn-secondary {
+                margin-left: 0;
+                margin-top: 15px;
+            }
+            
+            .mobile-menu-btn {
                 display: block;
-                padding: 15px 0;
-                font-size: 1.2rem;
             }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
@@ -1121,10 +1181,40 @@
                 <li><a href="#beneficios">Beneficios</a></li>
                 <li><a href="#testimonios">Testimonios</a></li>
                 <li><a href="#faq">FAQ</a></li>
-                <li><a href="#" onclick="openAuthModal()" class="auth-link">Iniciar Sesión</a></li>
+                <li><a href="#" class="auth-link">Iniciar Sesión</a></li>
             </ul>
         </nav>
     </header>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <span>CRO</span>
+            </div>
+            <button class="mobile-menu-close" id="mobileMenuClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <ul class="mobile-menu-links">
+            <li><a href="#home">Inicio</a></li>
+            <li><a href="#como-funciona">Cómo Funciona</a></li>
+            <li><a href="#nosotros">Nosotros</a></li>
+            <li><a href="#beneficios">Beneficios</a></li>
+            <li><a href="#testimonios">Testimonios</a></li>
+            <li><a href="#faq">FAQ</a></li>
+        </ul>
+        
+        <div class="mobile-menu-auth">
+            <a href="#" class="btn-primary">Iniciar Sesión</a>
+            <a href="#" class="btn-secondary">Registrarse</a>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
@@ -1635,7 +1725,7 @@
                     });
                     
                     // Close mobile menu if open
-                    document.querySelector('.nav-links').classList.remove('active');
+                    closeMobileMenu();
                 }
             });
         });
@@ -1713,21 +1803,31 @@
             }
         });
 
-        // Mobile menu toggle
-        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-            document.querySelector('.nav-links').classList.toggle('active');
-        });
-
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function(event) {
-            const navLinks = document.querySelector('.nav-links');
-            const menuBtn = document.querySelector('.mobile-menu-btn');
-            
-            if (navLinks.classList.contains('active') && 
-                !navLinks.contains(event.target) && 
-                event.target !== menuBtn) {
-                navLinks.classList.remove('active');
-            }
+        // Mobile menu functions
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mobileMenuClose = document.getElementById('mobileMenuClose');
+        
+        function openMobileMenu() {
+            mobileMenu.classList.add('active');
+            mobileMenuOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeMobileMenu() {
+            mobileMenu.classList.remove('active');
+            mobileMenuOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        mobileMenuBtn.addEventListener('click', openMobileMenu);
+        mobileMenuClose.addEventListener('click', closeMobileMenu);
+        mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+        
+        // Close menu when clicking on mobile menu links
+        document.querySelectorAll('.mobile-menu-links a').forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
         });
 
         // Initialize animations when page loads
@@ -1739,4 +1839,4 @@
         });
     </script>
 </body>
-</html> 
+</html>
